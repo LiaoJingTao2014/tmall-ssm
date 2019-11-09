@@ -1,9 +1,8 @@
 package com.experience.tmall.mapper;
 
-import java.util.List;
-
 import com.experience.tmall.pojo.User;
 import com.experience.tmall.pojo.UserExample;
+import java.util.List;
 
 public interface UserMapper {
     int deleteByPrimaryKey(Integer id);
