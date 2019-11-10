@@ -1,7 +1,3 @@
-<!-- 模仿天猫整站ssm 教程 为how2j.cn 版权所有-->
-<!-- 本教程仅用于学习使用，切勿用于非法用途，由此引起一切后果与本站无关-->
-<!-- 供购买者学习，请勿私自传播，否则自行承担相关法律责任-->
-
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8" isELIgnored="false"%>
 	
@@ -26,7 +22,6 @@
 					<td><span class="reviewProductInfoTableSellNumber">${p.saleCount}</span> 件</td>
 				</tr>
 			</table>
-			
 			<div class="reviewProductInfoRightBelowDiv">
 				<span class="reviewProductInfoRightBelowImg"><img1 src="img/site/reviewLight.png"></span>
 				<span class="reviewProductInfoRightBelowText" >现在查看的是 您所购买商品的信息
@@ -46,8 +41,7 @@
 			<div class="reviewStasticsRightEmpty"></div>
 			<div class="reviewStasticsFoot"></div>
 		</div>
-	</div>		
-	
+	</div>
 	<c:if test="${param.showonly==true}">
 	<div class="reviewDivlistReviews">
 		<c:forEach items="${reviews}" var="r">
