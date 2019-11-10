@@ -1,12 +1,8 @@
-<!-- 模仿天猫整站ssm 教程 为how2j.cn 版权所有-->
-<!-- 本教程仅用于学习使用，切勿用于非法用途，由此引起一切后果与本站无关-->
-<!-- 供购买者学习，请勿私自传播，否则自行承担相关法律责任-->
-
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8" isELIgnored="false"%>
 <div class="buyPageDiv">
   <form action="forecreateOrder" method="post">
-  
+
 	<div class="buyFlow">
 		<img class="pull-left" src="img/site/simpleLogo.png">
 		<img class="pull-right" src="img/site/buyflow.png">
@@ -15,7 +11,6 @@
 	<div class="address">
 		<div class="addressTip">输入收货地址</div>
 		<div>
-		
 			<table class="addressTable">
 				<tr>
 					<td class="firstColumn">详细地址<span class="redStar">*</span></td>
@@ -37,19 +32,9 @@
 			</table>
 			
 		</div>
-
-
-
-
-		
-		
-		
-	
 	</div>
 	<div class="productList">
 		<div class="productListTip">确认订单信息</div>
-		
-		
 		<table class="productListTable">
 			<thead>
 				<tr>
@@ -79,12 +64,9 @@
 						<a  href="foreproduct?pid=${oi.product.id}" class="orderItemProductLink">
 							${oi.product.name}
 						</a>
-						
-						
 							<img src="img/site/creditcard.png" title="支持信用卡支付">
 							<img src="img/site/7day.png" title="消费者保障服务,承诺7天退货">
 							<img src="img/site/promise.png" title="消费者保障服务,承诺如实描述">
-						
 						</td>
 						<td>
 						
@@ -102,19 +84,14 @@
 							<input type="radio" value="" checked="checked">
 							普通配送
 						</label>
-						
 						<select class="orderItemDeliverySelect" class="form-control">
 							<option>快递 免邮费</option>
 						</select>
-
 						</td>
 						</c:if>
-						
 					</tr>
-				</c:forEach>				
-				
+				</c:forEach>
 			</tbody>
-			
 		</table>
 		<div class="orderItemSumDiv">
 			<div class="pull-left">
@@ -129,13 +106,8 @@
 					</div>
 				</span>
 			</div>
-			
 			<span class="pull-right">店铺合计(含运费): ￥<fmt:formatNumber type="number" value="${total}" minFractionDigits="2"/></span>
 		</div>
-		
-
-				
-	
 	</div>
 
 	<div class="orderItemTotalSumDiv">
@@ -144,9 +116,9 @@
 			<span class="orderItemTotalSumSpan">￥<fmt:formatNumber type="number" value="${total}" minFractionDigits="2"/></span>
 		</div>
 	</div>
-	
+
 	<div class="submitOrderDiv">
 			<button type="submit" class="submitOrderButton">提交订单</button>
 	</div>
-  </form>		
+  </form>
 </div>

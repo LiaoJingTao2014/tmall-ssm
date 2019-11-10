@@ -1,10 +1,5 @@
-<!-- 模仿天猫整站ssm 教程 为how2j.cn 版权所有-->
-<!-- 本教程仅用于学习使用，切勿用于非法用途，由此引起一切后果与本站无关-->
-<!-- 供购买者学习，请勿私自传播，否则自行承担相关法律责任-->
-
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8" isELIgnored="false"%>
-	
 
 <script>
 var deleteOrderItem = false;
@@ -21,7 +16,7 @@ $(function(){
 		deleteOrderItem = true;
 		$("#deleteConfirmModal").modal('hide');
 	});
-	
+
 	$('#deleteConfirmModal').on('hidden.bs.modal', function (e) {
 		if(deleteOrderItem){
 			var page="foredeleteOrderItem";
@@ -40,7 +35,7 @@ $(function(){
 			
 		}
 	})	
-	
+
 	$("img.cartProductItemIfSelected").click(function(){
 		var selectit = $(this).attr("selectit")
 		if("selectit"==selectit){
@@ -79,8 +74,6 @@ $(function(){
 		}
 		syncCreateOrderButton();
 		calcCartSumPriceAndNumber();
-		
-
 	});
 	
 	$(".orderItemNumberSetting").keyup(function(){
@@ -96,7 +89,6 @@ $(function(){
 			num = 1;
 		if(num>stock)
 			num = stock;
-		
 		syncPrice(pid,num,price);
 	});
 
@@ -106,7 +98,6 @@ $(function(){
 		var stock= $("span.orderItemStock[pid="+pid+"]").text();
 		var price= $("span.orderItemPromotePrice[pid="+pid+"]").text();
 		var num= $(".orderItemNumberSetting[pid="+pid+"]").val();
-
 		num++;
 		if(num>stock)
 			num = stock;
@@ -116,14 +107,13 @@ $(function(){
 		var pid=$(this).attr("pid");
 		var stock= $("span.orderItemStock[pid="+pid+"]").text();
 		var price= $("span.orderItemPromotePrice[pid="+pid+"]").text();
-		
 		var num= $(".orderItemNumberSetting[pid="+pid+"]").val();
 		--num;
 		if(num<=0)
 			num=1;
 		syncPrice(pid,num,price);
-	});	
-	
+	});
+
 	$("button.createOrderButton").click(function(){
 		var params = "";
 		$(".cartProductItemIfSelected").each(function(){
@@ -135,9 +125,6 @@ $(function(){
 		params = params.substring(1);
 		location.href="forebuy?"+params;
 	});
-	
-	
-	
 })
 
 function syncCreateOrderButton(){
@@ -147,7 +134,7 @@ function syncCreateOrderButton(){
 			selectAny = true;
 		}
 	});
-	
+
 	if(selectAny){
 		$("button.createOrderButton").css("background-color","#C40000");
 		$("button.createOrderButton").removeAttr("disabled");
@@ -156,7 +143,6 @@ function syncCreateOrderButton(){
 		$("button.createOrderButton").css("background-color","#AAAAAA");
 		$("button.createOrderButton").attr("disabled","disabled");		
 	}
-		
 }
 function syncSelect(){
 	var selectAll = true;
@@ -165,14 +151,10 @@ function syncSelect(){
 			selectAll = false;
 		}
 	});
-	
 	if(selectAll)
 		$("img.selectAllItem").attr("src","img/site/cartSelected.png");
 	else
 		$("img.selectAllItem").attr("src","img/site/cartNotSelected.png");
-	
-	
-	
 }
 function calcCartSumPriceAndNumber(){
 	var sum = 0;
@@ -183,12 +165,9 @@ function calcCartSumPriceAndNumber(){
 		price = price.replace(/,/g, "");
 		price = price.replace(/￥/g, "");
 		sum += new Number(price);	
-		
 		var num =$(".orderItemNumberSetting[oiid="+oiid+"]").val();
 		totalNumber += new Number(num);	
-		
 	});
-	
 	$("span.cartSumPrice").html("￥"+formatMoney(sum));
 	$("span.cartTitlePrice").html("￥"+formatMoney(sum));
 	$("span.cartSumNumber").html(totalNumber);
@@ -198,7 +177,6 @@ function syncPrice(pid,num,price){
 	var cartProductItemSmallSumPrice = formatMoney(num*price); 
 	$(".cartProductItemSmallSumPrice[pid="+pid+"]").html("￥"+cartProductItemSmallSumPrice);
 	calcCartSumPriceAndNumber();
-	
 	var page = "forechangeOrderItem";
 	$.post(
 		    page,
@@ -209,7 +187,6 @@ function syncPrice(pid,num,price){
 				}
 		    }
 		);
-
 }
 </script>	
 
@@ -220,8 +197,6 @@ function syncPrice(pid,num,price){
 		<span class="cartTitlePrice">￥0.00</span>
 		<button class="createOrderButton" disabled="disabled">结 算</button>
 	</div>
-	
-	
 	<div class="cartProductList">
 		<table class="cartProductTable">
 			<thead>
@@ -229,7 +204,6 @@ function syncPrice(pid,num,price){
 					<th class="selectAndImage">
 							<img selectit="false" class="selectAllItem" src="img/site/cartNotSelected.png">				
 					全选
-					
 					</th>
 					<th>商品信息</th>
 					<th>单价</th>
@@ -263,45 +237,37 @@ function syncPrice(pid,num,price){
 							
 						</td>
 						<td>
-						
 							<div class="cartProductChangeNumberDiv">
 								<span class="hidden orderItemStock " pid="${oi.product.id}">${oi.product.stock}</span>
 								<span class="hidden orderItemPromotePrice " pid="${oi.product.id}">${oi.product.promotePrice}</span>
 								<a  pid="${oi.product.id}" class="numberMinus" href="#nowhere">-</a>
 								<input pid="${oi.product.id}" oiid="${oi.id}" class="orderItemNumberSetting" autocomplete="off" value="${oi.number}">
 								<a  stock="${oi.product.stock}" pid="${oi.product.id}" class="numberPlus" href="#nowhere">+</a>
-							</div>					
-						
+							</div>
 						 </td>
 						<td >
 							<span class="cartProductItemSmallSumPrice" oiid="${oi.id}" pid="${oi.product.id}" >
 							￥<fmt:formatNumber type="number" value="${oi.product.promotePrice*oi.number}" minFractionDigits="2"/>
 							</span>
-						
 						</td>
 						<td>
 							<a class="deleteOrderItem" oiid="${oi.id}"  href="#nowhere">删除</a>
 						</td>
 					</tr>
-				</c:forEach>				
+				</c:forEach>
 			</tbody>
-		
 		</table>
 	</div>
-	
+
 	<div class="cartFoot">
 		<img selectit="false" class="selectAllItem" src="img/site/cartNotSelected.png">
 		<span>全选</span>
 <!-- 		<a href="#">删除</a> -->
-		
 		<div class="pull-right">
 			<span>已选商品 <span class="cartSumNumber" >0</span> 件</span>
-			
 			<span>合计 (不含运费): </span> 
 			<span class="cartSumPrice" >￥0.00</span>
 			<button class="createOrderButton" disabled="disabled" >结  算</button>
 		</div>
-		
 	</div>
-	
 </div>
